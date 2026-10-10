@@ -1,6 +1,6 @@
 :root {
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Poppins', sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-body: "Poppins", sans-serif;
 
   --color-bg: #fbeef1;
   --color-heading: #2b1e22;
@@ -87,9 +87,31 @@ a {
 }
 
 .cart-icon {
+  position: relative;
   display: inline-flex;
   color: var(--color-heading);
   text-decoration: none;
+}
+
+.cart-count {
+  position: absolute;
+  top: -0.55rem;
+  right: -0.7rem;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  padding: 0 0.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.cart-count[hidden] {
+  display: none;
 }
 
 /* -----------------------------
@@ -108,8 +130,16 @@ a {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.5), transparent 45%),
-    radial-gradient(circle at 80% 75%, rgba(255, 255, 255, 0.35), transparent 50%),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 255, 255, 0.5),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 75%,
+      rgba(255, 255, 255, 0.35),
+      transparent 50%
+    ),
     linear-gradient(135deg, #f7e6ea 0%, #f3ede4 50%, #eddce2 100%);
 }
 
@@ -168,33 +198,6 @@ a {
 
 .btn-primary:hover {
   background: var(--color-accent-hover);
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  color: var(--color-eyebrow);
-  font-size: 0.7rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-.scroll-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--color-eyebrow), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 1; }
 }
 
 /* -----------------------------
@@ -274,7 +277,9 @@ a {
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
   z-index: 5;
-  transition: box-shadow 0.2s ease, opacity 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .carousel-btn:hover {
@@ -401,6 +406,18 @@ a {
 .btn-add:hover {
   background: var(--color-heading);
   color: #fff;
+}
+
+.quick-add button.is-added,
+.btn-add.is-added {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.quick-add button:disabled,
+.btn-add:disabled {
+  cursor: wait;
 }
 
 .empty-state {
