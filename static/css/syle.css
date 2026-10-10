@@ -93,6 +93,11 @@ a {
   text-decoration: none;
 }
 
+.cart-icon > i {
+  font-size: 1.375rem;
+  line-height: 1;
+}
+
 .cart-count {
   position: absolute;
   top: -0.55rem;

@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
 
     <link
       rel="stylesheet"
@@ -51,29 +55,19 @@
           class="cart-icon"
           aria-label="View cart, {{ cart_count }} item{% if cart_count != 1 %}s{% endif %}"
         >
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+          <span
+            class="cart-count"
+            aria-live="polite"
+            {%
+            if
+            cart_count=""
+            ="0"
+            %}hidden{%
+            endif
+            %}
+            >{{ cart_count }}</span
           >
-            <path
-              d="M6 8V6a6 6 0 0 1 12 0v2"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M4.5 8h15l-1 12.5a1.5 1.5 0 0 1-1.5 1.5H7a1.5 1.5 0 0 1-1.5-1.5L4.5 8Z"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          <span class="cart-count" aria-live="polite" {% if cart_count == 0 %}hidden{% endif %}>{{ cart_count }}</span>
         </a>
       </div>
     </header>
