@@ -59,13 +59,7 @@
           <span
             class="cart-count"
             aria-live="polite"
-            {%
-            if
-            cart_count=""
-            ="0"
-            %}hidden{%
-            endif
-            %}
+            data-count="{{ cart_count }}"
             >{{ cart_count }}</span
           >
         </a>

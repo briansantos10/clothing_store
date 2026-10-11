@@ -137,7 +137,7 @@ content %}
         })
         .then(function (result) {
           cartCount.textContent = result.count;
-          cartCount.hidden = result.count === 0;
+          cartCount.dataset.count = result.count;
           cartLink.setAttribute(
             "aria-label",
             "View cart, " +
