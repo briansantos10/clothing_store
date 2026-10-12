@@ -22,16 +22,20 @@
     <div class="featured-track">
       {% for product in featured %}
       <div class="featured-card">
-        <div class="placeholder-img" style="background-color: {{ product.placeholder_color or default_color }};"></div>
+        <div class="placeholder-img" style="background-color: {{ product.placeholder_color or default_color }};">
+          {% set src = product_image_src(product) %}{% if src %}<img src="{{ src }}" alt="{{ product.name }}" loading="lazy">{% endif %}
+        </div>
         <div class="featured-overlay">
           <h3>{{ product.name }}</h3>
           <p class="price">${{ '%.2f'|format(product.price) }}</p>
+          {% if product.description %}<p class="desc">{{ product.description }}</p>{% endif %}
         </div>
-        <form action="{{ url_for('add_to_cart') }}" method="POST" class="quick-add">
-          <input type="hidden" name="product" value="{{ product.name }}">
-          <input type="hidden" name="price" value="{{ product.price }}">
+        {% if product.in_stock %}
+        <form action="{{ url_for('add_to_cart') }}" method="POST" data-add-to-cart class="quick-add">
+          <input type="hidden" name="slug" value="{{ product.slug }}">
           <button type="submit">Add to Cart</button>
         </form>
+        {% else %}<span class="sold-out quick-add">Sold out</span>{% endif %}
       </div>
       {% endfor %}
     </div>
@@ -50,14 +54,18 @@
   <div class="product-grid">
     {% for product in rest %}
     <div class="product-card">
-      <div class="placeholder-img" style="background-color: {{ product.placeholder_color or default_color }};"></div>
+      <div class="placeholder-img" style="background-color: {{ product.placeholder_color or default_color }};">
+          {% set src = product_image_src(product) %}{% if src %}<img src="{{ src }}" alt="{{ product.name }}" loading="lazy">{% endif %}
+        </div>
       <h3>{{ product.name }}</h3>
       <p class="price">${{ '%.2f'|format(product.price) }}</p>
-      <form action="{{ url_for('add_to_cart') }}" method="POST">
-        <input type="hidden" name="product" value="{{ product.name }}">
-        <input type="hidden" name="price" value="{{ product.price }}">
+      {% if product.description %}<p class="desc">{{ product.description }}</p>{% endif %}
+      {% if product.in_stock %}
+      <form action="{{ url_for('add_to_cart') }}" method="POST" data-add-to-cart>
+        <input type="hidden" name="slug" value="{{ product.slug }}">
         <button type="submit" class="btn-add">Add to Cart</button>
       </form>
+      {% else %}<span class="sold-out">Sold out</span>{% endif %}
     </div>
     {% endfor %}
   </div>
